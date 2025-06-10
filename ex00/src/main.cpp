@@ -22,23 +22,32 @@ int main(int argc, char **argv)
 			std::cerr << "Error :\nCould not open infile" << std::endl;
 			return (1);
 		}
-		std::ifstream csvfile("../data.csv");
+		std::ifstream csvfile("data.csv");
 		if (!csvfile.is_open())
 		{
 			std::cerr << "Error :\nCould not open CSV file" << std::endl;
 			infile.close();
 			return (1);
 		}
-		std::map<std::string, double> dataMap;
-		
-
+		try
+		{
+			std::map<std::string, double> dataMap = dataMapCreation(csvfile);
+			if (!dataMap.empty())
+				std::cout << "First element: " << dataMap.begin()->first << " => " << dataMap.begin()->second << std::endl;
+			else
+				std::cout << "Map is empty." << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
 		infile.close();
 		csvfile.close();
 		return (0);
 	}
 	else
 	{
-		std::cerr << "Error :\n You need to turn in a file" << std::endl;
+		std::cerr << "Error :\nYou need to turn in a file" << std::endl;
 		return (1);
 	}
 }

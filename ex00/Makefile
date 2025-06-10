@@ -6,7 +6,7 @@
 #    By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/09 15:15:12 by paulmart          #+#    #+#              #
-#    Updated: 2025/06/09 15:17:08 by paulmart         ###   ########.fr        #
+#    Updated: 2025/06/10 10:32:37 by paulmart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_DIR = src/
 OBJ_DIR = obj
 
 SRC_FILES = \
-	BitcoiExchange.cpp\
+	BitcoinExchange.cpp\
 	main.cpp
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 
