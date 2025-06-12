@@ -6,14 +6,14 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:17:45 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/10 17:00:52 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:39:48 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/BitcoinExchange.hpp"
 
 
-std::map<std::string, double> dataMapCreation(std::ifstream &csvfile)
+std::map<std::string, double>	dataMapCreation(std::ifstream &csvfile)
 {
 	std::map<std::string, double> dataMap;
 	std::string line;
@@ -35,7 +35,7 @@ std::map<std::string, double> dataMapCreation(std::ifstream &csvfile)
 	return(dataMap);
 }
 
-void infileparsing (std::ifstream &infile, std::map<std::string, double> &dataMap)
+void	infileparsing(std::ifstream &infile, std::map<std::string, double> &dataMap)
 {
 	std::string line;
 	std::getline(infile, line);
@@ -47,6 +47,8 @@ void infileparsing (std::ifstream &infile, std::map<std::string, double> &dataMa
 		if (sep != std::string::npos)
 		{
 			std::string key = line.substr(0, sep);
+			key.erase(0, key.find_first_not_of(" \t\r\n"));
+			key.erase(key.find_last_not_of(" \t\r\n") + 1);
 			std::string valueStr = line.substr(sep + 1);
 			char *endptr;
 			errno = 0;
@@ -55,7 +57,7 @@ void infileparsing (std::ifstream &infile, std::map<std::string, double> &dataMa
 				throw std::runtime_error("Error :\nInvalid read in infile");
 			if (!checkdate(key))
 			{
-				std::cerr << "Error : bad input => " << key << std::endl; 
+				std::cerr << "Error : bad input => " << key << std::endl;
 				continue;
 			}
 			if (value < 0)
@@ -69,19 +71,29 @@ void infileparsing (std::ifstream &infile, std::map<std::string, double> &dataMa
 				continue;
 			}
 			double result = getResult(key, value, dataMap);
-			// std::cout << key << " => " << value << " = " << result
+			std::cout << key << " => " << value << " = " << result << std::endl;
+		}
+		else
+		{
+			std::cerr << "Error : bad input => " << line << std::endl;
+			continue;
 		}
 	}
 }
 
+
 double	getResult(std::string date, double value, std::map<std::string, double> &dataMap)
 {
-	std::map<std::string, double>::iterator it;
-	std::map<std::string, double>::iterator it = dataMap.upper_bound(date);
-	if (it != dataMap.end())
-		return (it->second * value);
-	else
-		return (dataMap.begin()->second * value);
+	std::map<std::string, double>::iterator it = dataMap.lower_bound(date);
+	if (it == dataMap.end())
+		--it;
+	else if (it->first != date)
+	{
+		if (it == dataMap.begin())
+			throw std::runtime_error("Error: no previous date available");
+		--it;
+	}
+	return (it->second * value);
 }
 
 bool	checkdate(std::string &date)
@@ -94,7 +106,7 @@ bool	checkdate(std::string &date)
 	std::istringstream	ifs(date);
 	int		day_by_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	if (!ifs >> year >> dash >> month >> dash2 >> day)
+	if (!(ifs >> year >> dash >> month >> dash2 >> day))
 		return (false);
 	if (year < 0 || year > 2025)
 		return (false);

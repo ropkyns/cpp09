@@ -32,10 +32,7 @@ int main(int argc, char **argv)
 		try
 		{
 			std::map<std::string, double> dataMap = dataMapCreation(csvfile);
-			if (!dataMap.empty())
-				std::cout << "First element: " << dataMap.begin()->first << " => " << dataMap.begin()->second << std::endl;
-			else
-				std::cout << "Map is empty." << std::endl;
+			infileparsing(infile, dataMap);
 		}
 		catch(const std::exception& e)
 		{
