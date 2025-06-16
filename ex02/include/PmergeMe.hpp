@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/13 14:35:24 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:36:22 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 # include <cerrno>
 # include <cctype>
 
-
+template <typename T>
+class PmergeMe
+{
+	private :
+	
+	public :
+	
+};
 
 #endif
