@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:01:43 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/18 12:53:24 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:34:58 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,12 @@ int jacobsthal(int n)
 		b = result;
 	}
 	return result;
+}
+
+int findJacobsthalIndex(int size)
+{
+	int k = 0;
+	while (jacobsthal(k) <= size)
+		++k;
+	return (k - 1);
 }

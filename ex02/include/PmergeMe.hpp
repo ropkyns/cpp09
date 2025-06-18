@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/18 17:17:42 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:53:29 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ class PmergeMe
 		
 	public :
 		
-	
 };
 
 template <typename Container>
@@ -62,7 +61,12 @@ void	algo(Container& container)
 	if (i < container.size())
 		main.push_back(container[i]);
 	algo(main);
-	
+	int jac = findJacobsthalIndex(pend.push());
+	for (int i = 2; i < jac; i++)
+	{
+		//comparer les valeurs et trouver ou va le int a l'indice de jacobsthal
+		
+	}
 }
 
 // std::vector		Algo(std::vector container)

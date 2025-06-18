@@ -6,13 +6,15 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:01:46 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/18 11:34:33 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:51:05 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
 
-bool isPositiveNumber(const char* str) {
+
+bool isPositiveNumber(const char* str)
+{
 	char* endptr;
 	errno = 0;
 	long val = std::strtol(str, &endptr, 10);
@@ -36,7 +38,6 @@ int	main(int argc, char **argv)
 				std::cerr << "Error : you need to turn in only positive number" << std::endl;
 				return (1);
 			}
-			
 		}
 	}
 }
