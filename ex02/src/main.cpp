@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:01:46 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/18 17:51:05 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:47:12 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	main(int argc, char **argv)
 		std::cerr << "Error : not enough argument" << std::endl;
 	else
 	{
+		std::vector<int> vec;
+		std::deque<int> deq;
 		for (int i = 1; i < argc; i++)
 		{
 			if (!isPositiveNumber(argv[i]))
@@ -38,6 +40,8 @@ int	main(int argc, char **argv)
 				std::cerr << "Error : you need to turn in only positive number" << std::endl;
 				return (1);
 			}
+			vec.push_back(std::atoi(argv[i]));
+			deq.push_back(std::atoi(argv[i]));
 		}
 	}
 }

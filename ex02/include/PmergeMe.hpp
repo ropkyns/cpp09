@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/19 11:57:19 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:36:15 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	algo(Container& container)
 	Container	pend;
 	size_t i = 0;
 
-	for (; i + 1 < container.size(); i += 2)
+	for (size_t i = 0; i + 1 < container.size(); i += 2)
 	{
 		int x = container[i];
 		int y = container[i + 1];
@@ -55,7 +55,7 @@ void	algo(Container& container)
 		pend.push_back(x);
 	}
 	if (container.size() % 2 != 0)
-		main.push_back(container[i]);
+		main.push_back(container.back());
 
 	algo(main);
 
