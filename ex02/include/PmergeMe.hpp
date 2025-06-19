@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/18 17:53:29 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:57:19 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,42 @@ void	algo(Container& container)
 {
 	if (container.size() <= 1)
 		return ;
+
 	Container	main;
 	Container	pend;
 	size_t i = 0;
+
 	for (; i + 1 < container.size(); i += 2)
 	{
 		int x = container[i];
 		int y = container[i + 1];
-		if (x < y)
-		{
-			pend.push_back(x);
-			main.push_back(y);
-		}
-		else
-		{
-			pend.push_back(y);
-			main.push_back(x);
-		}
+		if (x > y)
+			std::swap(x, y);
+		main.push_back(y);
+		pend.push_back(x);
 	}
-	if (i < container.size())
+	if (container.size() % 2 != 0)
 		main.push_back(container[i]);
+
 	algo(main);
+
 	int jac = findJacobsthalIndex(pend.push());
 	for (int i = 2; i < jac; i++)
 	{
-		//comparer les valeurs et trouver ou va le int a l'indice de jacobsthal
-		
+		int	valJac = pend.at(jacobsthal(i));
+		for (typename Container::iterator it = main.begin(); it != main.end(); ++it)
+		{
+			if (valJac < *it)
+			{
+				main.insert(it, valJac);
+				break;
+			}
+		}
+		if (valJac > main.back())
+			main.push_back(valJac);
 	}
+
+	container = main;
 }
 
 // std::vector		Algo(std::vector container)
