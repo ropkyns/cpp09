@@ -6,12 +6,11 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:01:46 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/19 13:47:12 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:32:38 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
-
 
 bool isPositiveNumber(const char* str)
 {
@@ -31,8 +30,8 @@ int	main(int argc, char **argv)
 		std::cerr << "Error : not enough argument" << std::endl;
 	else
 	{
-		std::vector<int> vec;
-		std::deque<int> deq;
+		PmergeMe<std::vector<int> > V;
+		PmergeMe<std::deque<int> > D;
 		for (int i = 1; i < argc; i++)
 		{
 			if (!isPositiveNumber(argv[i]))
@@ -40,8 +39,12 @@ int	main(int argc, char **argv)
 				std::cerr << "Error : you need to turn in only positive number" << std::endl;
 				return (1);
 			}
-			vec.push_back(std::atoi(argv[i]));
-			deq.push_back(std::atoi(argv[i]));
+			V.add(std::atoi(argv[i]));
+			D.add(std::atoi(argv[i]));
 		}
+		V.ford();
+		D.ford();
+		printContainer(V.getContainer(), "vec");
+		printContainer(D.getContainer(), "deq");
 	}
 }
