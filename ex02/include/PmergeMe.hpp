@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/19 15:32:03 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:37:54 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ class PmergeMe
 {
 	private :
 		clock_t	_start;
+		clock_t	_end;
+		double	_elapsed;
 		T		_container;
+
 	public :
 		PmergeMe();
 		~PmergeMe();
-
+		
 		void	add(int value);
 		T		&getContainer();
+		double	getElapsed();
 		void	ford();
 };
 
@@ -60,15 +64,12 @@ T &PmergeMe<T>::getContainer()
 {
 	return (_container);
 }
-
-template <typename Container>
-void printContainer(const Container& c, const std::string& name)
+template <typename T>
+double	PmergeMe<T>::getElapsed()
 {
-	std::cout << name << ": ";
-	for (typename Container::const_iterator it = c.begin(); it != c.end(); ++it)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	return (_elapsed);
 }
+
 
 
 template <typename Container>
@@ -140,7 +141,10 @@ void	algo(Container &container)
 template <typename T>
 void	PmergeMe<T>::ford()
 {
+	_start = std::clock();
 	algo(_container);
+	_end = std::clock();
+	_elapsed = static_cast<double>(_end - _start) / CLOCKS_PER_SEC;
 }
 
 // std::vector		Algo(std::vector container)
