@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:01:46 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/20 18:27:29 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/23 12:16:39 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	main(int argc, char **argv)
 			D.add(std::atoi(argv[i]));
 		}
 
-		std::cout << "Before:	";
+		std::cout << "Before: ";
 		for (std::vector<int>::const_iterator it = V.getContainer().begin(); it != V.getContainer().end(); ++it)
 			std::cout << *it << " ";
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
 
 		V.ford();
 
-		std::cout << "After:	";
+		std::cout << "After: ";
 		for (std::vector<int>::const_iterator it = V.getContainer().begin(); it != V.getContainer().end(); ++it)
 			std::cout << *it << " ";
-		std::cout << std::endl;
+		std::cout << std::endl << std::endl;
 
 		std::cout << "Time to process a range of " << V.getContainer().size() << " elements with std::vector : " << V.getElapsed() << " us" << std::endl;
 

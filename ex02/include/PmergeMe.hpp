@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/23 11:27:22 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:48:50 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,23 +142,5 @@ void	PmergeMe<T>::ford()
 	clock_t _end = std::clock();
 	_elapsed = static_cast<double>(_end - _start) / CLOCKS_PER_SEC;
 }
-
-// void		Algo(std::vector container)
-// {
-// 	tu tarrete s'il y a qu'un seul element ou moins;
-
-// 	std::vector	main;
-// 	std::vector pend;
-
-// 	for(tant que y'a deux elements)
-// 	{
-// 		grand dans main
-// 		petit dans pend	
-// 	}
-// 	s' il y a un restant
-// 		dans main;
-
-// 	Algo(main);
-// }
 
 #endif
