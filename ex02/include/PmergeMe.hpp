@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/20 17:37:54 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/23 11:27:22 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ template <typename T>
 class PmergeMe
 {
 	private :
-		clock_t	_start;
-		clock_t	_end;
 		double	_elapsed;
 		T		_container;
 
@@ -70,8 +68,6 @@ double	PmergeMe<T>::getElapsed()
 	return (_elapsed);
 }
 
-
-
 template <typename Container>
 void	algo(Container &container)
 {
@@ -109,7 +105,7 @@ void	algo(Container &container)
 		}
 		if (valJac > main.back())
 			main.push_back(valJac);
-		}
+	}
 
 	for (size_t i = 0; i < pend.size(); ++i)
 	{
@@ -141,13 +137,13 @@ void	algo(Container &container)
 template <typename T>
 void	PmergeMe<T>::ford()
 {
-	_start = std::clock();
+	clock_t _start = std::clock();
 	algo(_container);
-	_end = std::clock();
+	clock_t _end = std::clock();
 	_elapsed = static_cast<double>(_end - _start) / CLOCKS_PER_SEC;
 }
 
-// std::vector		Algo(std::vector container)
+// void		Algo(std::vector container)
 // {
 // 	tu tarrete s'il y a qu'un seul element ou moins;
 
