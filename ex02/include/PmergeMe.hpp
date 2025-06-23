@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:02:02 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/23 11:48:50 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:59:59 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ class PmergeMe
 	public :
 		PmergeMe();
 		~PmergeMe();
+		PmergeMe(const PmergeMe &P);
+		PmergeMe &operator= (const PmergeMe &P);
 		
 		void	add(int value);
 		T		&getContainer();
@@ -51,6 +53,20 @@ PmergeMe<T>::PmergeMe() {}
 
 template <typename T>
 PmergeMe<T>::~PmergeMe() {}
+
+template <typename T>
+PmergeMe<T>::PmergeMe(const PmergeMe &P)
+{
+	*this = P;
+}
+
+template <typename T>
+PmergeMe<T> &PmergeMe<T>::operator= (const PmergeMe &P)
+{
+	if (*this == P)
+		return (*this);
+	return (*this);
+}
 
 template <typename T>
 void	PmergeMe<T>::add(int value)
