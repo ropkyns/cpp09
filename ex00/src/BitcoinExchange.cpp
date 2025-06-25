@@ -6,7 +6,7 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 15:17:45 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/11 14:39:48 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/24 16:25:19 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ std::map<std::string, double>	dataMapCreation(std::ifstream &csvfile)
 			errno = 0;
 			double value = std::strtod(valueStr.c_str(), &endptr);
 			if (endptr == valueStr.c_str() || errno == ERANGE)
-				throw std::runtime_error("Error :\nInvalid value in CSV file");
+				throw std::runtime_error("Error : Invalid value in CSV file");
 			dataMap[key] = value;
 		}
 	}
@@ -50,11 +50,21 @@ void	infileparsing(std::ifstream &infile, std::map<std::string, double> &dataMap
 			key.erase(0, key.find_first_not_of(" \t\r\n"));
 			key.erase(key.find_last_not_of(" \t\r\n") + 1);
 			std::string valueStr = line.substr(sep + 1);
+			valueStr.erase(0, valueStr.find_first_not_of(" \t\r\n"));
+			valueStr.erase(valueStr.find_last_not_of(" \t\r\n") + 1);
+
 			char *endptr;
 			errno = 0;
 			double value = std::strtod(valueStr.c_str(), &endptr);
-			if (endptr == valueStr.c_str() || errno == ERANGE)
-				throw std::runtime_error("Error :\nInvalid read in infile");
+
+			while (*endptr && std::isspace(*endptr))
+				++endptr;
+
+			if (endptr == valueStr.c_str() || *endptr != '\0' || errno == ERANGE)
+			{
+				std::cerr << "Error : invalid number => " << valueStr << std::endl;
+				continue;
+			}
 			if (!checkdate(key))
 			{
 				std::cerr << "Error : bad input => " << key << std::endl;
@@ -103,10 +113,13 @@ bool	checkdate(std::string &date)
 	int		day;
 	char	dash;
 	char	dash2;
+	char	rest;
 	std::istringstream	ifs(date);
 	int		day_by_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 	if (!(ifs >> year >> dash >> month >> dash2 >> day))
+		return (false);
+	if (ifs >> rest)
 		return (false);
 	if (year < 0 || year > 2025)
 		return (false);

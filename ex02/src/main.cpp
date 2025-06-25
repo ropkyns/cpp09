@@ -6,11 +6,12 @@
 /*   By: paulmart <paulmart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 11:01:46 by paulmart          #+#    #+#             */
-/*   Updated: 2025/06/23 12:16:39 by paulmart         ###   ########.fr       */
+/*   Updated: 2025/06/24 15:34:59 by paulmart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/PmergeMe.hpp"
+#include <set>
 
 bool isPositiveNumber(const char* str)
 {
@@ -24,12 +25,30 @@ bool isPositiveNumber(const char* str)
 	return true;
 }
 
+bool hasDuplicates(int argc, char **argv)
+{
+	std::set<std::string> seen;
+	for (int i = 1; i < argc; ++i)
+	{
+		std::string val(argv[i]);
+		if (seen.find(val) != seen.end())
+			return (true);
+		seen.insert(val);
+	}
+	return (false);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc < 3)
 		std::cerr << "Error : not enough argument" << std::endl;
 	else
 	{
+		if (hasDuplicates(argc, argv))
+		{
+			std::cerr << "Error: duplicate arguments are not allowed" << std::endl;
+			return (1);
+		}
 		PmergeMe<std::vector<int> > V;
 		PmergeMe<std::deque<int> > D;
 		for (int i = 1; i < argc; i++)

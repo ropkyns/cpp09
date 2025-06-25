@@ -19,13 +19,13 @@ int main(int argc, char **argv)
 		std::ifstream infile(argv[1]);
 		if (!infile.is_open())
 		{
-			std::cerr << "Error :\nCould not open infile" << std::endl;
+			std::cerr << "Error : Could not open infile" << std::endl;
 			return (1);
 		}
 		std::ifstream csvfile("data.csv");
 		if (!csvfile.is_open())
 		{
-			std::cerr << "Error :\nCould not open CSV file" << std::endl;
+			std::cerr << "Error : Could not open CSV file" << std::endl;
 			infile.close();
 			return (1);
 		}
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		std::cerr << "Error :\nYou need to turn in a file" << std::endl;
+		std::cerr << "Error : You need to turn in a file" << std::endl;
 		return (1);
 	}
 }
